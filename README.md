@@ -1,4 +1,5 @@
-欢迎并感谢star项目、提issue！
+欢迎并感谢star项目、提issue、关注我的公众号：
+<img width="305" height="120" alt="image" src="https://github.com/user-attachments/assets/56c4d35e-317d-4d2d-8ac5-918e2ebfe03c" />
 
 
 ## 2025.09.26 v2.0版本
