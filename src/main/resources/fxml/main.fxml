@@ -5,67 +5,82 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.jdr2021.controller.mainController">
-   <children>
-      <VBox prefHeight="800.0" prefWidth="400.0">
-         <children>
-            <TreeView fx:id="treeView" prefHeight="800.0" prefWidth="400.0" />
-         </children>
-      </VBox>
-      <VBox prefHeight="800.0" prefWidth="800.0">
-         <children>
-            <WebView fx:id="webView" prefHeight="800.0" />
-         </children>
-      </VBox>
-      <VBox prefHeight="800.0" prefWidth="200.0">
-         <children>
-            <Label prefHeight="30.0" prefWidth="180.0" text="kkFileView" textAlignment="RIGHT" textFill="#e12020">
-               <VBox.margin>
-                  <Insets left="10.0" top="80.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_kkfileview_url">
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label prefHeight="30.0" prefWidth="100.0" text="存储桶地址" textFill="#d70b0b">
-               <VBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </VBox.margin>
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tf_oss_url">
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Button mnemonicParsing="false" onAction="#Loading" prefHeight="40.0" prefWidth="150.0" text="加载">
-               <VBox.margin>
-                  <Insets left="10.0" top="20.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#PreviousFile" prefHeight="40.0" prefWidth="150.0" text="上一个">
-               <VBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </VBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#NextFile" prefHeight="40.0" prefWidth="150.0" text="下一个">
-               <VBox.margin>
-                  <Insets left="10.0" top="10.0" />
-               </VBox.margin>
-            </Button>
-         </children>
-      </VBox>
-   </children>
-</HBox>
+<?import javafx.scene.layout.HBox?>
+<SplitPane xmlns="http://javafx.com/javafx/8.0.171"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="net.jdr2021.controller.mainController"
+           dividerPositions="0.2, 0.8" prefWidth="1400.0" prefHeight="800.0">
+
+    <items>
+        <!-- 左侧：统计 + TreeView -->
+        <VBox fx:id="leftPane" spacing="4" prefWidth="300.0" minWidth="200.0">
+            <children>
+                <!-- 统计信息 -->
+                <Label fx:id="treeStatsLabel" text="统计信息: 0 项" style="-fx-font-weight: bold;"/>
+
+                <!-- TreeView -->
+                <TreeView fx:id="treeView" VBox.vgrow="ALWAYS"/>
+            </children>
+        </VBox>
+
+        <!-- 中间：WebView -->
+        <VBox fx:id="centerPane" spacing="4">
+            <children>
+                <WebView fx:id="webView" VBox.vgrow="ALWAYS"/>
+            </children>
+        </VBox>
+
+        <!-- 右侧：ScrollPane 包裹 VBox -->
+        <ScrollPane fitToWidth="true" prefWidth="300.0">
+            <content>
+                <VBox fx:id="rightPane" spacing="8" fillWidth="true">
+                    <padding>
+                        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+                    </padding>
+
+                    <children>
+                        <Label text="kkFileView 在线查看 URL" textFill="#e12020">
+                            <font><Font size="18.0"/></font>
+                        </Label>
+
+                        <TextField fx:id="tf_kkfileview_url" promptText="kkFileView URL" maxWidth="Infinity"/>
+                        <Button mnemonicParsing="false" onAction="#LoadkkFileView" text="加载 kkFileView"
+                                prefHeight="40.0" maxWidth="Infinity"/>
+
+                        <Label text="存储桶地址" textFill="#d70b0b">
+                            <font><Font size="18.0"/></font>
+                        </Label>
+
+                        <TextField fx:id="tf_oss_url" promptText="存储桶地址" maxWidth="Infinity"/>
+
+                        <CheckBox fx:id="tf_oss_ignoreSSLErr" text="忽略 tls 证书错误"/>
+
+                        <Button mnemonicParsing="false" onAction="#Loading" text="加载"
+                                prefHeight="40.0" maxWidth="Infinity"/>
+
+                        <HBox spacing="8">
+                            <children>
+                                <Button mnemonicParsing="false" onAction="#PreviousFile" text="上一个"
+                                        prefHeight="40.0" maxWidth="Infinity"/>
+                                <Button mnemonicParsing="false" onAction="#NextFile" text="下一个"
+                                        prefHeight="40.0" maxWidth="Infinity"/>
+                            </children>
+                        </HBox>
+
+                        <Button mnemonicParsing="false" onAction="#SaveFile" text="保存选中资源"
+                                prefHeight="40.0" maxWidth="Infinity"/>
+                        <Button mnemonicParsing="false" onAction="#SaveAllFile" text="保存全部资源"
+                                prefHeight="40.0" maxWidth="Infinity"/>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </items>
+</SplitPane>

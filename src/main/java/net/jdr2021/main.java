@@ -17,6 +17,8 @@ import java.io.InputStream;
 
 public class main extends Application {
 
+    public static Stage PrimaryStage;
+
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -24,14 +26,19 @@ public class main extends Application {
             loader.setLocation(getClass().getResource("/fxml/main.fxml"));
             Parent content = loader.load();
             Scene scene = new Scene(content);
+
             // 添加图标
             InputStream iconStream = getClass().getResourceAsStream("/images/logo.png");
             Image icon = new Image(iconStream);
             primaryStage.getIcons().add(icon);
-            primaryStage.setTitle(" 存储桶遍历漏洞工具-20240725-jdr2021");
+            primaryStage.setTitle("OSS遍历漏洞工具20251001-新版发布关注公众号：诸神之光，基于20240725-jdr2021版本");
             primaryStage.setScene(scene);
-            primaryStage.setResizable(false);
+//            primaryStage.setResizable(false);
+            primaryStage.sizeToScene();  //根据窗口大小调整
             primaryStage.show();
+
+
+            PrimaryStage = primaryStage;
         } catch(Exception e) {
             e.printStackTrace();
         }
