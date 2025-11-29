@@ -1,5 +1,13 @@
-欢迎并感谢star项目、提issue、关注我的公众号：
+**如果有帮助到你，欢迎并感谢star项目、提issue、关注我的公众号：**
 <img width="305" height="120" alt="image" src="https://github.com/user-attachments/assets/56c4d35e-317d-4d2d-8ac5-918e2ebfe03c" />
+
+## 2025.11.30 v2.1版本
+
+1. 支持翻页
+2. 支持PUT
+3. UI优化
+
+详细介绍请查看：
 
 
 ## 2025.09.26 v2.0版本
